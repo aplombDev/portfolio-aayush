@@ -41,7 +41,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <CoreSkills />
+      <div className="mt-28">
+        <CoreSkills />
+      </div>
     </main>
   );
 }
