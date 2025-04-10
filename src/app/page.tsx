@@ -68,7 +68,7 @@ export default function Home() {
 
       {showContent && (
         <>
-          <main className="min-h-screen p-5 flex flex-col items-center bg-gradient-to-br from-background to-muted/20">
+          <main className="min-h-screen p-5 flex flex-col items-center">
             <div className="w-full flex justify-between items-center absolute top-5 px-5">
               <div className="h-10 w-2xl relative ml-10">
                 <LogoImg />

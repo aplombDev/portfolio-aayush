@@ -1,8 +1,9 @@
 "use client";
-import React, { useRef, useEffect } from 'react';
-import { Card } from '../ui/card';
-import Image from "next/image";
 import gsap from 'gsap';
+import Image from "next/image";
+import { Card } from '../ui/card';
+import GsapMagnet from './GsapMagnet';
+import React, { useRef, useEffect } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -25,31 +26,20 @@ const CoreSkills = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    // Reset refs arrays when component mounts
     useEffect(() => {
         cardRefs.current = [];
-        imageRefs.current = [];
     }, []);
 
-    // Function to handle card ref assignment
     const addToCardRefs = (el: HTMLDivElement | null, index: number) => {
         cardRefs.current[index] = el;
-    };
-
-    // Function to handle image ref assignment
-    const addToImageRefs = (el: HTMLDivElement | null, index: number) => {
-        imageRefs.current[index] = el;
     };
 
     useEffect(() => {
         if (!sectionRef.current) return;
 
-        // Hide section initially
         gsap.set(sectionRef.current, { autoAlpha: 0, y: 100 });
 
-        // Create scroll trigger for the entire section
         ScrollTrigger.create({
             trigger: sectionRef.current,
             start: "top bottom-=100px",
@@ -71,7 +61,6 @@ const CoreSkills = () => {
             }
         });
 
-        // Card animations
         const animateCards = () => {
             const validCardRefs = cardRefs.current.filter(Boolean) as HTMLDivElement[];
 
@@ -91,77 +80,60 @@ const CoreSkills = () => {
             }
         };
 
-        // Floating animation for images
-        const animateImages = () => {
-            const validImageRefs = imageRefs.current.filter(Boolean) as HTMLDivElement[];
-
-            validImageRefs.forEach((image, index) => {
-                gsap.to(image, {
-                    y: -10,
-                    duration: 2,
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut",
-                    delay: index * 0.1
-                });
-            });
-        };
-
-        // Small timeout to ensure all refs are collected
         const timer = setTimeout(() => {
             animateCards();
-            animateImages();
         }, 100);
 
         return () => {
             clearTimeout(timer);
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-            gsap.killTweensOf(imageRefs.current.filter(Boolean) as HTMLDivElement[]);
         };
     }, []);
-
     return (
         <section
             ref={sectionRef}
-            className="w-full min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-muted/10 to-background"
+            className="w-full min-h-screen flex flex-col items-center"
         >
-            <h2 className="text-3xl font-bold mb-8">Core Skills</h2>
-            <div ref={containerRef} className="w-full max-w-4xl mx-auto py-20">
+            <div className="w-full py-8 flex justify-center">
+                <h2 className="text-3xl font-bold">Core Skills</h2>
+            </div>
 
-                <div className="space-y-8">
-                    {skillGroups.map((group, groupIndex) => (
-                        <div
-                            key={groupIndex}
-                            className="grid grid-cols-2 md:grid-cols-4 gap-4"
-                        >
-                            {group.map((skill, skillIndex) => {
-                                const cardIndex = skillGroups
-                                    .slice(0, groupIndex)
-                                    .reduce((sum, g) => sum + g.length, 0) + skillIndex;
+            <div className="flex-grow flex flex-col justify-center items-center w-full">
+                <div ref={containerRef} className="w-full max-w-4xl mx-auto py-4 px-4">
+                    <div className="flex flex-col gap-8 items-center">
+                        {skillGroups.map((group, groupIndex) => (
+                            <div
+                                key={groupIndex}
+                                className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full"
+                            >
+                                {group.map((skill, skillIndex) => {
+                                    const cardIndex = skillGroups
+                                        .slice(0, groupIndex)
+                                        .reduce((sum, g) => sum + g.length, 0) + skillIndex;
 
-                                return (
-                                    <Card
-                                        key={`${groupIndex}-${skillIndex}`}
-                                        ref={(el) => addToCardRefs(el, cardIndex)}
-                                        className="flex flex-col items-center justify-center p-10 gap-12"
-                                    >
-                                        <div
-                                            ref={(el) => addToImageRefs(el, cardIndex)}
-                                            className="relative h-12 w-12 cursor-pointer transform transition-transform duration-300 will-change-transform hover:scale-105"
+                                    return (
+                                        <Card
+                                            key={`${groupIndex}-${skillIndex}`}
+                                            ref={(el) => addToCardRefs(el, cardIndex)}
+                                            className="flex flex-col items-center justify-center p-6 gap-3 w-full"
                                         >
-                                            <Image
-                                                src={skill.logo}
-                                                alt={`${skill.name} Logo`}
-                                                fill
-                                                className="object-contain"
-                                            />
-                                        </div>
-                                        <span className="text-lg font-medium">{skill.name}</span>
-                                    </Card>
-                                );
-                            })}
-                        </div>
-                    ))}
+                                            <GsapMagnet>
+                                                <div className="relative h-20 w-20 cursor-pointer">
+                                                    <Image
+                                                        src={skill.logo}
+                                                        alt={`${skill.name} Logo`}
+                                                        fill
+                                                        className="object-contain"
+                                                    />
+                                                </div>
+                                            </GsapMagnet>
+                                            <span className="text-lg font-medium">{skill.name}</span>
+                                        </Card>
+                                    );
+                                })}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
