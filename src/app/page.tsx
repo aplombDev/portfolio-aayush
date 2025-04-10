@@ -1,14 +1,18 @@
 "use client";
-import { ModeToggle } from "@/hooks/useDarkMode";
-import LoadingPage from "@/components/custom/loadingPage";
+import gsap from "gsap";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
-import gsap from "gsap";
+import Blog from "@/components/custom/Blog";
+import { ModeToggle } from "@/hooks/useDarkMode";
+import Project from "@/components/custom/Project";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ContactUs from "@/components/custom/Contactus";
 import CoreSkills from "@/components/custom/coreSkills";
+import Experience from "@/components/custom/Experience";
+import LoadingPage from "@/components/custom/loadingPage";
+import LogoImg from "@/components/custom/LogoImg";
 
-// Register plugins
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -28,7 +32,7 @@ export default function Home() {
     tl.to(boxRefs.current, {
       scale: 0,
       y: 60,
-      rotation: 400,
+      rotation: 200,
       duration: 3.5,
       repeat: 1,
       yoyo: true,
@@ -65,41 +69,36 @@ export default function Home() {
       {showContent && (
         <>
           <main className="min-h-screen p-5 flex flex-col items-center bg-gradient-to-br from-background to-muted/20">
-            <div className="w-full max-w-4xl flex justify-between items-center mb-20">
-              <div className="w-[100px] h-[100px] relative">
-                <Image
-                  src="/images/user-logo.png"
-                  fill
-                  alt="User Logo"
-                  className="object-contain"
-                  priority
-                />
+            <div className="w-full flex justify-between items-center absolute top-5 px-5">
+              <div className="h-10 w-2xl relative ml-10">
+                <LogoImg />
               </div>
-              <ModeToggle />
+              <div className="mr-10">
+                <ModeToggle />
+              </div>
             </div>
 
-            <div className="w-full max-w-4xl justify-center items-center flex flex-col md:flex-row  gap-10 relative">
-              <div className="flex-1 space-y-4 order-2 md:order-1 z-10">
-                <h1 className="text-4xl font-extralight tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-                  Aayush Joshi
-                </h1>
-                <p className="bg-gradient-to-r from-blue-600 via-blue-800 to-blue-500 bg-clip-text text-2xl font-medium tracking-tight text-transparent sm:text-4xl">
-                  React Software Developer
-                </p>
-              </div>
+            <div className="flex-grow flex items-center justify-center w-full">
+              <div className="w-full max-w-4xl flex flex-col md:flex-row items-center gap-10 relative">
+                <div className="flex-1 space-y-4 order-2 md:order-1 z-10">
+                  <h1 className="text-4xl font-extralight tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+                    Aayush Joshi
+                  </h1>
+                  <p className="bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200 bg-clip-text text-2xl font-medium tracking-tight text-transparent sm:text-4xl">
+                    React Software Developer
+                  </p>
+                </div>
 
-              <div className="relative order-1 md:order-2 z-10">
-                <div className="absolute inset-0 w-[350px] h-[350px] rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 blur-xl -z-10 animate-pulse-slow" />
-                <div className="absolute inset-0 w-[320px] h-[320px] rounded-full bg-gradient-to-tr from-primary/10 to-secondary/10 blur-md -z-20" />
-
-                <div className="w-[300px] h-[300px] relative rounded-full overflow-hidden border-4 border-primary/20">
-                  <Image
-                    src="/images/user-profile.jpg"
-                    fill
-                    alt="Profile Picture"
-                    className="object-cover"
-                    priority
-                  />
+                <div className="relative order-1 md:order-2 z-10">
+                  <div className="w-[350px] h-[350px] relative rounded-full overflow-hidden border-4 border-primary/20">
+                    <Image
+                      src="/images/user-profile.jpg"
+                      fill
+                      alt="Profile Picture"
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -108,6 +107,23 @@ export default function Home() {
           <div ref={coreSkillsRef} className="min-h-screen justify-center items-center">
             <CoreSkills />
           </div>
+
+          <div className="min-h-screen justify-center items-center">
+            <Experience />
+          </div>
+
+          <div className="min-h-screen justify-center items-center">
+            <Project />
+          </div>
+
+          <div className="min-h-screen justify-center items-center">
+            <Blog />
+          </div>
+
+          <div className="min-h-screen justify-center items-center">
+            <ContactUs />
+          </div>
+
         </>
       )}
     </>

@@ -25,15 +25,22 @@ const CoreSkills = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    // Reset card refs array when component mounts
+    // Reset refs arrays when component mounts
     useEffect(() => {
         cardRefs.current = [];
+        imageRefs.current = [];
     }, []);
 
     // Function to handle card ref assignment
     const addToCardRefs = (el: HTMLDivElement | null, index: number) => {
         cardRefs.current[index] = el;
+    };
+
+    // Function to handle image ref assignment
+    const addToImageRefs = (el: HTMLDivElement | null, index: number) => {
+        imageRefs.current[index] = el;
     };
 
     useEffect(() => {
@@ -64,7 +71,7 @@ const CoreSkills = () => {
             }
         });
 
-        // Card animations - wait until all cards are rendered
+        // Card animations
         const animateCards = () => {
             const validCardRefs = cardRefs.current.filter(Boolean) as HTMLDivElement[];
 
@@ -84,12 +91,32 @@ const CoreSkills = () => {
             }
         };
 
+        // Floating animation for images
+        const animateImages = () => {
+            const validImageRefs = imageRefs.current.filter(Boolean) as HTMLDivElement[];
+
+            validImageRefs.forEach((image, index) => {
+                gsap.to(image, {
+                    y: -10,
+                    duration: 2,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                    delay: index * 0.1
+                });
+            });
+        };
+
         // Small timeout to ensure all refs are collected
-        const timer = setTimeout(animateCards, 100);
+        const timer = setTimeout(() => {
+            animateCards();
+            animateImages();
+        }, 100);
 
         return () => {
             clearTimeout(timer);
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+            gsap.killTweensOf(imageRefs.current.filter(Boolean) as HTMLDivElement[]);
         };
     }, []);
 
@@ -98,8 +125,8 @@ const CoreSkills = () => {
             ref={sectionRef}
             className="w-full min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-muted/10 to-background"
         >
+            <h2 className="text-3xl font-bold mb-8">Core Skills</h2>
             <div ref={containerRef} className="w-full max-w-4xl mx-auto py-20">
-                <h2 className="text-3xl font-bold mb-8 text-center">Core Skills</h2>
 
                 <div className="space-y-8">
                     {skillGroups.map((group, groupIndex) => (
@@ -118,7 +145,10 @@ const CoreSkills = () => {
                                         ref={(el) => addToCardRefs(el, cardIndex)}
                                         className="flex flex-col items-center justify-center p-10 gap-12"
                                     >
-                                        <div className="relative h-12 w-12 cursor-pointer transform transition-transform duration-300 will-change-transform hover:scale-105">
+                                        <div
+                                            ref={(el) => addToImageRefs(el, cardIndex)}
+                                            className="relative h-12 w-12 cursor-pointer transform transition-transform duration-300 will-change-transform hover:scale-105"
+                                        >
                                             <Image
                                                 src={skill.logo}
                                                 alt={`${skill.name} Logo`}
