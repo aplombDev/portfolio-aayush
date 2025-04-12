@@ -69,11 +69,11 @@ export default function Home() {
       {showContent && (
         <>
           <main className="min-h-screen p-5 flex flex-col items-center">
-            <div className="w-full flex justify-between items-center absolute top-5 px-5">
-              <div className="h-10 w-2xl relative ml-10">
+            <div className="w-full flex justify-between items-center absolute top-5 px-[5%] gap-8">
+              <div className="h-10 w-2xl relative">
                 <LogoImg />
               </div>
-              <div className="mr-10">
+              <div className="mr-0">
                 <ModeToggle />
               </div>
             </div>
@@ -84,7 +84,7 @@ export default function Home() {
                   <h1 className="text-4xl font-extralight tracking-tight text-foreground sm:text-6xl lg:text-7xl">
                     Aayush Joshi
                   </h1>
-                  <p className="bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200 bg-clip-text text-2xl font-medium tracking-tight text-transparent sm:text-4xl">
+                  <p className="bg-gradient-to-r from-blue-500 via-blue-300 to-blue-100 bg-clip-text text-2xl font-medium tracking-tight text-transparent sm:text-4xl">
                     React Software Developer
                   </p>
                 </div>
@@ -123,7 +123,6 @@ export default function Home() {
           <div className="min-h-screen justify-center items-center">
             <ContactUs />
           </div>
-
         </>
       )}
     </>

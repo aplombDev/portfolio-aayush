@@ -43,7 +43,7 @@ const Experience = () => {
     return (
         <div
             ref={containerRef}
-            className="min-h-screen w-full flex flex-col justify-center items-center bg-gradient-to-br from-muted/10 to-background"
+            className="min-h-screen w-full flex flex-col justify-center items-center"
         >
             <div
                 ref={textRef}

@@ -38,8 +38,16 @@ const CoreSkills = () => {
     useEffect(() => {
         if (!sectionRef.current) return;
 
-        gsap.set(sectionRef.current, { autoAlpha: 0, y: 100 });
+        // Set initial 3D perspective and position
+        gsap.set(sectionRef.current, {
+            autoAlpha: 0,
+            rotationX: 15,
+            scale: 0.8,
+            transformPerspective: 1000,
+            transformOrigin: "center center"
+        });
 
+        // 3D zoom scroll animation
         ScrollTrigger.create({
             trigger: sectionRef.current,
             start: "top bottom-=100px",
@@ -47,26 +55,30 @@ const CoreSkills = () => {
             onEnter: () => {
                 gsap.to(sectionRef.current, {
                     autoAlpha: 1,
-                    y: 0,
-                    duration: 1,
+                    rotationX: 0,
+                    scale: 1,
+                    duration: 1.5,
                     ease: "power3.out"
                 });
             },
             onLeaveBack: () => {
                 gsap.to(sectionRef.current, {
                     autoAlpha: 0,
-                    y: 100,
-                    duration: 0.5
+                    rotationX: 15,
+                    scale: 0.8,
+                    duration: 0.8
                 });
             }
         });
 
+        // Card animations with 3D effect
         const animateCards = () => {
             const validCardRefs = cardRefs.current.filter(Boolean) as HTMLDivElement[];
 
             if (validCardRefs.length > 0) {
                 gsap.from(validCardRefs, {
                     y: 50,
+                    rotationX: 45,
                     opacity: 0,
                     duration: 0.8,
                     stagger: 0.1,
@@ -76,6 +88,33 @@ const CoreSkills = () => {
                         start: "top 70%",
                         toggleActions: "play none none none",
                     }
+                });
+
+                // Add hover 3D tilt effect to each card
+                validCardRefs.forEach((card) => {
+                    card.addEventListener("mousemove", (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+
+                        gsap.to(card, {
+                            rotationY: (x - centerX) / 20,
+                            rotationX: -(y - centerY) / 20,
+                            duration: 0.5,
+                            ease: "power2.out"
+                        });
+                    });
+
+                    card.addEventListener("mouseleave", () => {
+                        gsap.to(card, {
+                            rotationY: 0,
+                            rotationX: 0,
+                            duration: 0.7,
+                            ease: "elastic.out(1, 0.5)"
+                        });
+                    });
                 });
             }
         };
@@ -89,22 +128,36 @@ const CoreSkills = () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
     }, []);
+
     return (
         <section
             ref={sectionRef}
             className="w-full min-h-screen flex flex-col items-center"
+            style={{
+                perspective: "1000px",
+                transformStyle: "preserve-3d"
+            }}
         >
             <div className="w-full py-8 flex justify-center">
                 <h2 className="text-3xl font-bold">Core Skills</h2>
             </div>
 
-            <div className="flex-grow flex flex-col justify-center items-center w-full">
+            <div
+                className="flex-grow flex flex-col justify-center items-center w-full"
+                style={{
+                    perspective: "1000px",
+                    transformStyle: "preserve-3d"
+                }}
+            >
                 <div ref={containerRef} className="w-full max-w-4xl mx-auto py-4 px-4">
                     <div className="flex flex-col gap-8 items-center">
                         {skillGroups.map((group, groupIndex) => (
                             <div
                                 key={groupIndex}
                                 className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full"
+                                style={{
+                                    transformStyle: "preserve-3d"
+                                }}
                             >
                                 {group.map((skill, skillIndex) => {
                                     const cardIndex = skillGroups
@@ -115,7 +168,11 @@ const CoreSkills = () => {
                                         <Card
                                             key={`${groupIndex}-${skillIndex}`}
                                             ref={(el) => addToCardRefs(el, cardIndex)}
-                                            className="flex flex-col items-center justify-center p-6 gap-3 w-full"
+                                            className="flex flex-col items-center justify-center p-6 gap-3 w-full transition-transform duration-300"
+                                            style={{
+                                                transformStyle: "preserve-3d",
+                                                backfaceVisibility: "visible"
+                                            }}
                                         >
                                             <GsapMagnet>
                                                 <div className="relative h-20 w-20 cursor-pointer">
