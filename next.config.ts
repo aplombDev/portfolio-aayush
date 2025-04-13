@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
 
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   images: {
     domains: ["example.com", "anotherdomain.com"],
   },

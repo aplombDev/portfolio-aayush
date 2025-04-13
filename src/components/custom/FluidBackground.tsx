@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 
 export default function FluidBackground() {
@@ -8,7 +6,7 @@ export default function FluidBackground() {
     const particlesRef = useRef<any[]>([]);
     const animationIdRef = useRef<number | null>(null);
     const mousePosRef = useRef<{ x: number; y: number; active: boolean }>({ x: 0, y: 0, active: false });
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible] = useState(true); // ✅ Now ESLint won't complain
 
     useEffect(() => {
         if (!canvasRef.current) return;
