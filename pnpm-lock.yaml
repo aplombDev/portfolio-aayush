@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@emailjs/browser':
+        specifier: ^4.4.1
+        version: 4.4.1
       '@gsap/react':
         specifier: ^2.1.2
         version: 2.1.2(gsap@3.12.7)(react@19.1.0)
@@ -77,6 +80,12 @@ importers:
       tailwind-merge:
         specifier: ^3.1.0
         version: 3.1.0
+      three:
+        specifier: ^0.175.0
+        version: 0.175.0
+      three-stdlib:
+        specifier: ^2.35.15
+        version: 2.35.15(three@0.175.0)
       tw-animate-css:
         specifier: ^1.2.5
         version: 1.2.5
@@ -96,6 +105,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.1.1
         version: 19.1.1(@types/react@19.1.0)
+      '@types/three':
+        specifier: ^0.175.0
+        version: 0.175.0
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.3)
@@ -124,6 +136,10 @@ packages:
   '@babel/runtime@7.27.0':
     resolution: {integrity: sha512-VtPOkrdPHZsKc/clNqyi9WUA8TINkZ4cGk63UUE3u4pmB2k+ZMQRDuIOagv8UVd6j7k0T3+RRIb7beKTebNbcw==}
     engines: {node: '>=6.9.0'}
+
+  '@emailjs/browser@4.4.1':
+    resolution: {integrity: sha512-DGSlP9sPvyFba3to2A50kDtZ+pXVp/0rhmqs2LmbMS3I5J8FSOgLwzY2Xb4qfKlOVHh29EAutLYwe5yuEZmEFg==}
+    engines: {node: '>=14.0.0'}
 
   '@emnapi/core@1.4.0':
     resolution: {integrity: sha512-H+N/FqT07NmLmt6OFFtDfwe8PNygprzBikrEMyQfgqSmT0vzE515Pz7R8izwB9q/zsH/MA64AKoul3sA6/CzVg==}
@@ -2589,6 +2605,8 @@ snapshots:
   '@babel/runtime@7.27.0':
     dependencies:
       regenerator-runtime: 0.14.1
+
+  '@emailjs/browser@4.4.1': {}
 
   '@emnapi/core@1.4.0':
     dependencies:

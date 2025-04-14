@@ -4,16 +4,15 @@ import Image from "next/image";
 import { words } from "@/constant";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
-import Blog from "@/components/custom/Blog";
-import { ModeToggle } from "@/hooks/useDarkMode";
 import Project from "@/components/custom/section/Project";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ContactUs from "@/components/custom/Contactus";
 import CoreSkills from "@/components/custom/section/coreSkills";
-import Experience from "@/components/custom/Experience";
 import LoadingPage from "@/components/custom/loadingPage";
 import LogoImg from "@/components/custom/LogoImg";
 import AnimatedCounter from "@/components/custom/section/AnimatedCounter";
+import Experience from "@/components/custom/section/Experience";
+import Testimonials from "@/components/custom/section/Testimonials";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,9 +81,6 @@ export default function Home() {
             <div className="w-full flex justify-between items-center absolute top-5 px-[5%] gap-8 z-50">
               <div className="h-10 w-2xl relative">
                 <LogoImg />
-              </div>
-              <div className="mr-0">
-                <ModeToggle />
               </div>
             </div>
 
@@ -167,7 +163,7 @@ export default function Home() {
 
 
           <div className="min-h-screen py-20 flex justify-center items-center">
-            <Blog />
+            <Testimonials />
           </div>
 
           <div className="min-h-screen py-20 flex justify-center items-center">
