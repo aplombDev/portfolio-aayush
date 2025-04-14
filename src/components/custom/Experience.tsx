@@ -49,7 +49,6 @@ const Experience = () => {
                 ref={textRef}
                 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500 p-8 shadow-lg"
             >
-                This page is under Maintenance
             </div>
         </div>
     );
