@@ -11,7 +11,7 @@ interface BaseCard {
 }
 
 interface GlowCardProps<TCard extends BaseCard> {
-    card?: TCard;
+    card: TCard; // remove optional flag
     index?: number;
     children?: ReactNode;
 }

@@ -20,6 +20,8 @@ const CoreSkills = () => {
             { name: "Linux", logo: "/logo/Linux.png" },
             { name: "Tailwind", logo: "/logo/Tailwind-CSS.png" },
             { name: "Git", logo: "/logo/Git.png" },
+            { name: "Redux", logo: "/logo/Redux.png" },
+
         ]
     ];
 

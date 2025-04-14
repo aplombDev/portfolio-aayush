@@ -3,31 +3,32 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TitleHeader from "../TitleHeader";
 import { expCards } from "@/constant";
-import GlowCard from "../GlowCard";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const Experience = () => {
     useGSAP(() => {
-        // Loop through each timeline card and animate them in
-        gsap.utils.toArray<HTMLElement>(".timeline-card").forEach((card) => {
+        const timelineCards = gsap.utils.toArray<HTMLElement>(".timeline-card");
+        const expTexts = gsap.utils.toArray<HTMLElement>(".expText");
+        const timeline = document.querySelector(".timeline");
+
+        if (!timelineCards.length || !expTexts.length || !timeline) return;
+
+        timelineCards.forEach((card) => {
             gsap.from(card, {
                 xPercent: -100,
                 opacity: 0,
-                transformOrigin: "left left",
                 duration: 1,
                 ease: "power2.inOut",
                 scrollTrigger: {
                     trigger: card,
                     start: "top 80%",
+                    toggleActions: "play none none none"
                 },
             });
         });
 
-        // Animate the timeline height
-        gsap.to(".timeline", {
-            transformOrigin: "bottom bottom",
-            ease: "power1.inOut",
+        gsap.to(timeline, {
             scrollTrigger: {
                 trigger: ".timeline",
                 start: "top center",
@@ -35,47 +36,46 @@ const Experience = () => {
                 onUpdate: (self: ScrollTrigger) => {
                     gsap.to(".timeline", {
                         scaleY: 1 - self.progress,
+                        ease: "power1.inOut"
                     });
-                },
-            },
+                }
+            }
         });
 
-        // Loop through each expText element
-        gsap.utils.toArray<HTMLElement>(".expText").forEach((text) => {
+        expTexts.forEach((text) => {
             gsap.from(text, {
                 opacity: 0,
-                xPercent: 0,
+                x: 50,
                 duration: 1,
                 ease: "power2.inOut",
                 scrollTrigger: {
                     trigger: text,
-                    start: "top 60%",
+                    start: "top 75%",
+                    toggleActions: "play none none none"
                 },
             });
-        }, "<");
+        });
     }, []);
 
     return (
         <section
             id="experience"
-            className="flex-center md:mt-40 mt-20 section-padding xl:px-0"
+            className="flex-center md:mt-40 mt-20 section-padding xl:px-0 relative"
         >
-            <div className="w-full h-full md:px-20 px-5">
+            <div className="w-full h-full mb-28 md:px-20 px-5">
                 <TitleHeader
                     title="Professional Work Experience"
-                    sub="💼 My Career Overview"
+                    sub=" "
+                    className="mb-24"
                 />
-                <div className="mt-32 relative">
+
+                <div className="relative">
                     <div className="relative z-50 xl:space-y-32 space-y-10">
                         {expCards.map((card) => (
-                            <div key={card.title} className="exp-card-wrapper">
-                                <div className="xl:w-2/6">
-                                    <GlowCard card={card}>
-                                        <div>
-                                            <img src={card.imgPath} alt="exp-img" />
-                                        </div>
-                                    </GlowCard>
-                                </div>
+                            <div
+                                key={card.title}
+                                className="exp-card-wrapper timeline-card"
+                            >
                                 <div className="xl:w-4/6">
                                     <div className="flex items-start">
                                         <div className="timeline-wrapper">
@@ -84,17 +84,23 @@ const Experience = () => {
                                         </div>
                                         <div className="expText flex xl:gap-20 md:gap-10 gap-5 relative z-20">
                                             <div className="timeline-logo">
-                                                <img src={card.logoPath} alt="logo" />
+                                                <img
+                                                    src={card.logoPath}
+                                                    className="rounded-full"
+                                                    alt="logo"
+                                                    width={60}
+                                                    height={60}
+                                                />
                                             </div>
                                             <div>
                                                 <h1 className="font-semibold text-3xl">{card.title}</h1>
                                                 <p className="my-5 text-white-50">
                                                     🗓️&nbsp;{card.date}
                                                 </p>
-                                                <p className="text-[#839CB5] italic">
+                                                <p className="text-[#839CB5] italic mb-4"> {/* Added margin-bottom */}
                                                     Responsibilities
                                                 </p>
-                                                <ul className="list-disc ms-5 mt-5 flex flex-col gap-5 text-white-50">
+                                                <ul className="list-disc ms-5 text-white-50 space-y-1"> {/* Using Tailwind's space-y-1 */}
                                                     {card.responsibilities.map(
                                                         (responsibility: string, index: number) => (
                                                             <li key={index} className="text-lg">

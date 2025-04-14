@@ -6,13 +6,14 @@ import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
 import Project from "@/components/custom/section/Project";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ContactUs from "@/components/custom/Contactus";
+import ContactUs from "@/components/custom/section/Contactus";
 import CoreSkills from "@/components/custom/section/coreSkills";
 import LoadingPage from "@/components/custom/loadingPage";
 import LogoImg from "@/components/custom/LogoImg";
 import AnimatedCounter from "@/components/custom/section/AnimatedCounter";
 import Experience from "@/components/custom/section/Experience";
 import Testimonials from "@/components/custom/section/Testimonials";
+import Footer from "@/components/custom/section/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,40 +31,43 @@ export default function Home() {
       onComplete: () => setShowContent(true)
     });
 
-    tl.to(boxRefs.current, {
-      scale: 0.5,
+    // Initial gather animation
+    tl.from(boxRefs.current, {
+      x: () => gsap.utils.random(-200, 200),
+      y: () => gsap.utils.random(-200, 200),
+      opacity: 0,
       duration: 1,
-      ease: "power2.inOut",
-      stagger: {
-        amount: 1,
-        from: "center"
-      }
+      ease: "power2.out",
+      stagger: 0.05
     });
 
+    // Hold briefly
     tl.to(boxRefs.current, {
-      y: 0,
-      rotation: 360,
-      opacity: 0,
-      duration: 1.5,
-      ease: "power2.in",
-      stagger: {
-        amount: 1,
-        from: "center"
-      }
+      duration: 0.5
     });
 
+    // Explosion effect
+    tl.to(boxRefs.current, {
+      x: () => gsap.utils.random(-800, 800),
+      y: () => gsap.utils.random(-800, 800),
+      scale: () => gsap.utils.random(0.2, 1.5),
+      opacity: 0,
+      duration: 1.2,
+      ease: "power3.out",
+      stagger: 0.02
+    });
+
+    // Smooth container exit
     tl.to(containerRef.current, {
-      scale: 0,
-      duration: 0.5,
-      ease: "power2.in"
-    });
-
-    tl.to(wrapperRef.current, {
       opacity: 0,
-      duration: 0.3,
-      display: "none"
-    });
+      duration: 0.4
+    }, "-=0.5");
 
+    // Hide wrapper
+    tl.to(wrapperRef.current, {
+      display: "none",
+      duration: 0.1
+    });
   }, { scope: wrapperRef });
 
   return (
@@ -166,9 +170,10 @@ export default function Home() {
             <Testimonials />
           </div>
 
-          <div className="min-h-screen py-20 flex justify-center items-center">
+          <div className="min-h-screen justify-center items-center">
             <ContactUs />
           </div>
+          <Footer />
         </>
       )}
     </>
