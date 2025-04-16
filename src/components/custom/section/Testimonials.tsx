@@ -19,13 +19,49 @@ const Testimonials = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-    // Store ref callback properly
     const setCardRef = (index: number) => (el: HTMLDivElement | null) => {
         cardsRef.current[index] = el;
     };
 
     useGSAP(() => {
-        // ... (rest of your animation code remains the same)
+        // Initial animation setup
+        gsap.from(cardsRef.current, {
+            y: 50,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Hover animation setup for each card
+        cardsRef.current.forEach((card) => {
+            if (!card) return;
+
+            const glow = card.querySelector('.glow-effect') as HTMLElement;
+
+            card.addEventListener('mouseenter', () => {
+                gsap.to(glow, {
+                    opacity: 1,
+                    scale: 1.05,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                gsap.to(glow, {
+                    opacity: 0.7,
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+        });
     }, { scope: containerRef });
 
     return (
@@ -41,9 +77,12 @@ const Testimonials = () => {
                     {testimonials.map((testimonial: Testimonial, index: number) => (
                         <div
                             key={index}
-                            ref={setCardRef(index)}  // Correct ref assignment
-                            className="mb-6"
+                            ref={setCardRef(index)}
+                            className="mb-6 relative group"
                         >
+                            {/* Glow effect element */}
+                            <div className="glow-effect absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl opacity-0 group-hover:opacity-70 blur-md -z-10 transition-all duration-300"></div>
+
                             <GlowCard card={testimonial} index={index}>
                                 <div className="flex items-center gap-3">
                                     <div>

@@ -1,8 +1,9 @@
 import { useRef, ReactNode } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 interface BaseCard {
     review?: string;
-    // Add other card properties here if needed
     imgPath?: string;
     logoPath?: string;
     title?: string;
@@ -11,39 +12,77 @@ interface BaseCard {
 }
 
 interface GlowCardProps<TCard extends BaseCard> {
-    card: TCard; // remove optional flag
+    card: TCard;
     index?: number;
     children?: ReactNode;
 }
 
 const GlowCard = <TCard extends BaseCard>({ card, index = 0, children }: GlowCardProps<TCard>) => {
-    const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const cardRef = useRef<HTMLDivElement>(null);
+    const glowRef = useRef<HTMLDivElement>(null);
 
-    const handleMouseMove = (index: number) => (e: React.MouseEvent<HTMLDivElement>) => {
-        const card = cardRefs.current[index];
-        if (!card) return;
+    useGSAP(() => {
+        const cardEl = cardRef.current;
+        const glowEl = glowRef.current;
 
-        const rect = card.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left - rect.width / 2;
-        const mouseY = e.clientY - rect.top - rect.height / 2;
+        if (!cardEl || !glowEl) return;
 
-        let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
-        angle = (angle + 360) % 360;
+        // Initial state
+        gsap.set(glowEl, {
+            opacity: 0,
+            scale: 0.95,
+            background: 'conic-gradient(from 0deg, #4f46e5, #9333ea, #4f46e5)'
+        });
 
-        card.style.setProperty("--start", `${angle + 60}deg`);
-    };
+        // Hover animation
+        const handleMouseEnter = () => {
+            gsap.to(glowEl, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        };
 
-    const setCardRef = (el: HTMLDivElement | null, index: number) => {
-        cardRefs.current[index] = el;
-    };
+        const handleMouseLeave = () => {
+            gsap.to(glowEl, {
+                opacity: 0,
+                scale: 0.95,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        };
+
+        cardEl.addEventListener('mouseenter', handleMouseEnter);
+        cardEl.addEventListener('mouseleave', handleMouseLeave);
+
+        return () => {
+            cardEl.removeEventListener('mouseenter', handleMouseEnter);
+            cardEl.removeEventListener('mouseleave', handleMouseLeave);
+        };
+    }, { scope: cardRef });
 
     return (
         <div
-            ref={(el) => setCardRef(el, index)}
-            onMouseMove={handleMouseMove(index)}
-            className="card card-border timeline-card rounded-xl p-10 mb-5 break-inside-avoid-column"
+            ref={cardRef}
+            className="relative rounded-xl p-10 mb-5 overflow-hidden"
+            style={{
+                background: 'rgba(15, 23, 42, 0.5)',
+                border: '1px solid rgba(255, 255, 255, 0.1)'
+            }}
         >
-            <div className="glow"></div>
+            {/* Glow Border Effect */}
+            <div
+                ref={glowRef}
+                className="absolute inset-0 -z-10 rounded-xl pointer-events-none"
+                style={{
+                    padding: '1px',
+                    backgroundClip: 'padding-box',
+                    filter: 'blur(8px)'
+                }}
+            ></div>
+
+            {/* Content */}
             <div className="flex items-center gap-1 mb-5">
                 {Array.from({ length: 5 }, (_, i) => (
                     <img key={i} src="/images/star.png" alt="star" className="size-5" />

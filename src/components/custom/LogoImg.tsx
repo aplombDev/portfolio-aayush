@@ -11,7 +11,7 @@ const LogoImg: React.FC = () => {
             priority
             alt="User Logo"
             className="object-contain"
-            src={theme === "dark" ? "/images/user-logo-white.png" : "/images/user-logo-black.png"}
+            src={theme === "dark" ? "/images/user-logo-white.png" : ""}
         />
     );
 };
