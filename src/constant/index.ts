@@ -1,22 +1,3 @@
-// const navLinks = [
-//   {
-//     name: "Work",
-//     link: "#work",
-//   },
-//   {
-//     name: "Experience",
-//     link: "#experience",
-//   },
-//   {
-//     name: "Skills",
-//     link: "#skills",
-//   },
-//   {
-//     name: "Testimonials",
-//     link: "#testimonials",
-//   },
-// ];
-
 const words = [
   { text: "Ideas", imgPath: "/images/ideas.svg" },
   { text: "Concepts", imgPath: "/images/concepts.svg" },
@@ -29,9 +10,9 @@ const words = [
 ];
 
 const counterItems = [
-  { value: 5, suffix: "+", label: "Years of Experience" },
-  { value: 20, suffix: "+", label: "Satisfied Clients" },
-  { value: 10, suffix: "+", label: "Completed Projects" },
+  { value: 3, suffix: "+", label: "Years of Experience" },
+  { value: 10, suffix: "+", label: "Satisfied Clients" },
+  { value: 5, suffix: "+", label: "Completed Projects" },
   { value: 70, suffix: "%", label: "Client Retention Rate" },
 ];
 
@@ -71,47 +52,6 @@ const logoIconsList = [
   },
 ];
 
-// const abilities = [
-//   {
-//     imgPath: "/images/seo.png",
-//     title: "Quality Focus",
-//     desc: "Delivering high-quality results while maintaining attention to every detail.",
-//   },
-//   {
-//     imgPath: "/images/chat.png",
-//     title: "Reliable Communication",
-//     desc: "Keeping you updated at every step to ensure transparency and clarity.",
-//   },
-//   {
-//     imgPath: "/images/time.png",
-//     title: "On-Time Delivery",
-//     desc: "Making sure projects are completed on schedule, with quality & attention to detail.",
-//   },
-// ];
-
-// const techStackImgs = [
-//   {
-//     name: "React Developer",
-//     imgPath: "/images/logos/react.png",
-//   },
-//   {
-//     name: "Python Developer",
-//     imgPath: "/images/logos/python.svg",
-//   },
-//   {
-//     name: "Backend Developer",
-//     imgPath: "/images/logos/node.png",
-//   },
-//   {
-//     name: "Interactive Developer",
-//     imgPath: "/images/logos/three.png",
-//   },
-//   {
-//     name: "Project Manager",
-//     imgPath: "/images/logos/git.svg",
-//   },
-// ];
-
 const expCards = [
   {
     logoPath: "/images/pndc.jpeg",
@@ -145,21 +85,6 @@ const expCards = [
       "Integrated frontend components with a Java RESTful API for seamless data communication.",
       "Developed and maintained a Single Page Application (SPA) using React.",
     ],
-  },
-];
-
-const expLogos = [
-  {
-    name: "logo1",
-    imgPath: "/images/logo1.png",
-  },
-  {
-    name: "logo2",
-    imgPath: "/images/logo2.png",
-  },
-  {
-    name: "logo3",
-    imgPath: "/images/logo3.png",
   },
 ];
 
@@ -210,32 +135,32 @@ const testimonials = [
 
 const socialImgs = [
   {
-    name: "insta",
-    imgPath: "/images/insta.png",
+    name: "Discord",
+    imgPath: "/images/D.png",
+    socialLink: "https://discord.com/users/farmer0059",
   },
   {
     name: "fb",
     imgPath: "/images/fb.png",
+    socialLink: "https://www.facebook.com/aayush.joshi.9469",
   },
   {
     name: "x",
-    imgPath: "/images/x.png",
+    imgPath: "/images/Y.png",
+    socialLink: "https://www.youtube.com/@knowsomethingt",
   },
   {
     name: "linkedin",
     imgPath: "/images/linkedin.png",
+    socialLink: "https://www.linkedin.com/in/aayush-joshi-dev10/",
   },
 ];
 
 export {
   words,
-  // abilities,
   logoIconsList,
   counterItems,
   expCards,
-  expLogos,
   testimonials,
   socialImgs,
-  // techStackImgs,
-  // navLinks,
 };

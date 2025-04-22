@@ -1,7 +1,6 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import TitleHeader from "../TitleHeader";
 import { expCards } from "@/constant";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -63,11 +62,6 @@ const Experience = () => {
             className="flex-center md:mt-40 mt-20 section-padding xl:px-0 relative"
         >
             <div className="w-full h-full mb-28 md:px-20 px-5">
-                <TitleHeader
-                    title="Professional Work Experience"
-                    sub=" "
-                    className="mb-24"
-                />
 
                 <div className="relative">
                     <div className="relative z-50 xl:space-y-32 space-y-10">
@@ -97,13 +91,13 @@ const Experience = () => {
                                                 <p className="my-5 text-white-50">
                                                     🗓️&nbsp;{card.date}
                                                 </p>
-                                                <p className="text-[#839CB5] italic mb-4"> {/* Added margin-bottom */}
+                                                <p className="text-[#839CB5] italic mb-4">
                                                     Responsibilities
                                                 </p>
-                                                <ul className="list-disc ms-5 text-white-50 space-y-1"> {/* Using Tailwind's space-y-1 */}
+                                                <ul className="list-disc ms-5 text-white-50">
                                                     {card.responsibilities.map(
                                                         (responsibility: string, index: number) => (
-                                                            <li key={index} className="text-lg">
+                                                            <li key={index} className="text-lg mb-6 last:mb-0">
                                                                 {responsibility}
                                                             </li>
                                                         )

@@ -24,6 +24,7 @@
     "@react-three/fiber": "^9.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.7.4",
     "gsap": "^3.12.7",
     "husky": "^9.1.7",
     "lucide-react": "^0.487.0",

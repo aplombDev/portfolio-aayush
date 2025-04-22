@@ -45,22 +45,25 @@ const Project = () => {
 
     return (
         <div id="work" ref={sectionRef} className="app-showcase">
-            <div className="w-full">
+            <div className="w-full h-full max-w-7xl mx-auto md:px-10 px-4">
                 <div className="showcaselayout">
-                    {/* Mobile Khata - Wrapped in link without affecting layout */}
                     <div className="first-project-wrapper" ref={rydeRef}>
                         <a
                             href="https://mobilekhata.checkmysite.live/login"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="block w-full h-full" // Makes entire area clickable
+                            className="block"
                         >
-                            <div className="image-wrapper cursor-pointer">
-                                <img src="/images/mobilekhataa.png" alt="Mobile Khata" />
+                            <div className="image-wrapper cursor-pointer h-[400px] w-full relative overflow-hidden rounded-lg">
+                                <img
+                                    src="/images/mobilekhataa.png"
+                                    alt="Mobile Khata"
+                                    className="absolute h-full w-full object-cover object-center"
+                                />
                             </div>
-                            <div className="text-content">
-                                <h2>Mobile Khata</h2>
-                                <p className="text-white-50 md:text-xl">
+                            <div className="text-content mt-4">
+                                <h2 className="text-2xl font-bold">Mobile Khata</h2>
+                                <p className="text-white-50 md:text-xl mt-2">
                                     A digital ledger app for vendors to track transactions.
                                 </p>
                             </div>
@@ -68,7 +71,6 @@ const Project = () => {
                     </div>
 
                     <div className="project-list-wrapper overflow-hidden">
-                        {/* Subisu - Link preserves original styling */}
                         <div className="project" ref={libraryRef}>
                             <a
                                 href="https://customer.subisu.net.np/"
@@ -76,14 +78,17 @@ const Project = () => {
                                 rel="noopener noreferrer"
                                 className="block w-full h-full"
                             >
-                                <div className="image-wrapper bg-[#FFEFDB] cursor-pointer">
-                                    <img src="/images/Subisu.png" alt="Subisu Portal" />
+                                <div className="image-wrapper bg-[#FFEFDB] cursor-pointer h-[300px] w-full relative overflow-hidden rounded-lg">
+                                    <img
+                                        src="/images/Subisu.png"
+                                        alt="Subisu Portal"
+                                        className="absolute h-full w-full object-contain object-center p-4"
+                                    />
                                 </div>
-                                <h2>Subisu Customer Portal</h2>
+                                <h2 className="text-2xl font-bold mt-4">Subisu Customer Portal</h2>
                             </a>
                         </div>
 
-                        {/* Kathmandu Trading - Maintains identical visual appearance */}
                         <div className="project" ref={ycDirectoryRef}>
                             <a
                                 href="https://kathmandutradinggroup.com/"
@@ -91,10 +96,14 @@ const Project = () => {
                                 rel="noopener noreferrer"
                                 className="block w-full h-full"
                             >
-                                <div className="image-wrapper bg-[#FFE7EB] cursor-pointer">
-                                    <img src="/images/kathmanduTraders.png" alt="Kathmandu Trading" />
+                                <div className="image-wrapper bg-[#FFE7EB] cursor-pointer h-[300px] w-full relative overflow-hidden rounded-lg">
+                                    <img
+                                        src="/images/kathmanduTraders.png"
+                                        alt="Kathmandu Trading"
+                                        className="absolute h-full w-full object-contain object-center p-4"
+                                    />
                                 </div>
-                                <h2>Kathmandu Trading Group</h2>
+                                <h2 className="text-2xl font-bold mt-4">Kathmandu Trading Group</h2>
                             </a>
                         </div>
                     </div>

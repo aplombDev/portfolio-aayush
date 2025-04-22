@@ -4,7 +4,6 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { testimonials } from "@/constant";
 import GlowCard from "../GlowCard";
-import TitleHeader from "../TitleHeader";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -24,7 +23,6 @@ const Testimonials = () => {
     };
 
     useGSAP(() => {
-        // Initial animation setup
         gsap.from(cardsRef.current, {
             y: 50,
             opacity: 0,
@@ -38,7 +36,6 @@ const Testimonials = () => {
             }
         });
 
-        // Hover animation setup for each card
         cardsRef.current.forEach((card) => {
             if (!card) return;
 
@@ -65,14 +62,8 @@ const Testimonials = () => {
     }, { scope: containerRef });
 
     return (
-        <section id="testimonials" className="flex-center section-padding" ref={containerRef}>
-            <div className="w-full h-full md:px-10 px-5">
-                <TitleHeader
-                    title="What People Say About Me?"
-                    sub=""
-                    className="testimonials-title mb-16"
-                />
-
+        <section id="testimonials" className="flex-center section-padding cursor-pointer" ref={containerRef}>
+            <div className="w-full h-full max-w-7xl mx-auto md:px-10 px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {testimonials.map((testimonial: Testimonial, index: number) => (
                         <div
@@ -80,8 +71,7 @@ const Testimonials = () => {
                             ref={setCardRef(index)}
                             className="mb-6 relative group"
                         >
-                            {/* Glow effect element */}
-                            <div className="glow-effect absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl opacity-0 group-hover:opacity-70 blur-md -z-10 transition-all duration-300"></div>
+                            <div className="glow-effect absolute inset-0 bg-gradient-to-r from-amber-400 via-pink-500 to-amber-400 rounded-xl opacity-50 group-hover:opacity-70 blur-md -z-10 transition-all duration-300"></div>
 
                             <GlowCard card={testimonial} index={index}>
                                 <div className="flex items-center gap-3">

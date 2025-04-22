@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aayush Joshi | React",
+  title: "Aayush Joshi",
   description: "Software Engineer",
 };
 

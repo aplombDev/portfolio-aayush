@@ -447,7 +447,7 @@ body::before {
     }
 
     .first-project-wrapper {
-      @apply h-full flex flex-col justify-between xl:w-[60%];
+      @apply h-full flex flex-col justify-between xl:w-[80%];
 
       .image-wrapper {
         @apply xl:h-[70vh] md:h-[50vh] h-96 relative;
@@ -597,7 +597,7 @@ body::before {
       @apply flex items-center justify-center gap-5;
 
       .icon {
-        @apply border border-black-50 bg-black-100 flex justify-center items-center rounded-xl size-10 md:size-12 cursor-pointer transition-all duration-500 hover:bg-black-50;
+        @apply border border-black-50 w-10 bg-black-100 flex justify-center items-center rounded-xl size-10 md:size-12 cursor-pointer transition-all duration-500 hover:bg-black-50;
       }
 
       img {

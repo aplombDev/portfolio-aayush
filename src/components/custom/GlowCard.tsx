@@ -27,14 +27,12 @@ const GlowCard = <TCard extends BaseCard>({ card, index = 0, children }: GlowCar
 
         if (!cardEl || !glowEl) return;
 
-        // Initial state
         gsap.set(glowEl, {
             opacity: 0,
             scale: 0.95,
-            background: 'conic-gradient(from 0deg, #4f46e5, #9333ea, #4f46e5)'
+            background: 'conic-gradient(from 0deg, #f59e0b, #ec4899, #f59e0b)'
         });
 
-        // Hover animation
         const handleMouseEnter = () => {
             gsap.to(glowEl, {
                 opacity: 1,
@@ -71,7 +69,6 @@ const GlowCard = <TCard extends BaseCard>({ card, index = 0, children }: GlowCar
                 border: '1px solid rgba(255, 255, 255, 0.1)'
             }}
         >
-            {/* Glow Border Effect */}
             <div
                 ref={glowRef}
                 className="absolute inset-0 -z-10 rounded-xl pointer-events-none"
@@ -82,7 +79,6 @@ const GlowCard = <TCard extends BaseCard>({ card, index = 0, children }: GlowCar
                 }}
             ></div>
 
-            {/* Content */}
             <div className="flex items-center gap-1 mb-5">
                 {Array.from({ length: 5 }, (_, i) => (
                     <img key={i} src="/images/star.png" alt="star" className="size-5" />
