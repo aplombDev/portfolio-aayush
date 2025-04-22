@@ -15,6 +15,8 @@ import Experience from "@/components/custom/section/Experience";
 import Testimonials from "@/components/custom/section/Testimonials";
 import Footer from "@/components/custom/section/Footer";
 
+// git config user.name "aplombDev"
+// git config user.email "aayushj2001@gmail.com"
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
