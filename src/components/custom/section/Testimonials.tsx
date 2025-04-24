@@ -2,20 +2,14 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { testimonials } from "@/constant";
 import GlowCard from "../GlowCard";
+import { testimonials } from "@/constant";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-interface Testimonial {
-    name: string;
-    mentions: string;
-    review: string;
-    imgPath: string;
-}
-
 const Testimonials = () => {
     const containerRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
     const setCardRef = (index: number) => (el: HTMLDivElement | null) => {
@@ -23,71 +17,73 @@ const Testimonials = () => {
     };
 
     useGSAP(() => {
-        gsap.from(cardsRef.current, {
+        gsap.from(titleRef.current, {
             y: 50,
             opacity: 0,
-            stagger: 0.1,
             duration: 0.8,
-            ease: "power2.out",
+            ease: "back.out(1.2)",
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: "top 80%",
+                start: "top 90%",
                 toggleActions: "play none none none"
             }
         });
 
-        cardsRef.current.forEach((card) => {
+        cardsRef.current.forEach((card, i) => {
             if (!card) return;
 
-            const glow = card.querySelector('.glow-effect') as HTMLElement;
-
-            card.addEventListener('mouseenter', () => {
-                gsap.to(glow, {
-                    opacity: 1,
-                    scale: 1.05,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
+            gsap.from(card, {
+                y: 50 + (i % 3) * 20,
+                opacity: 0,
+                scale: 0.95,
+                duration: 0.8,
+                delay: i * 0.1,
+                ease: "back.out(1.5)",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
             });
 
-            card.addEventListener('mouseleave', () => {
-                gsap.to(glow, {
-                    opacity: 0.7,
-                    scale: 1,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
+            gsap.to(card, {
+                y: -5,
+                duration: 3,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+                delay: i * 0.2
             });
         });
     }, { scope: containerRef });
 
     return (
-        <section id="testimonials" className="flex-center section-padding cursor-pointer" ref={containerRef}>
+        <section id="testimonials" className="flex-center section-padding" ref={containerRef}>
             <div className="w-full h-full max-w-7xl mx-auto md:px-10 px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {testimonials.map((testimonial: Testimonial, index: number) => (
+                <h2 ref={titleRef} className="text-4xl font-bold text-center mb-16 text-amber-100 opacity-0">
+                    What People Say
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer">
+                    {testimonials.map((testimonial, index) => (
                         <div
                             key={index}
                             ref={setCardRef(index)}
-                            className="mb-6 relative group"
+                            className="h-full"
                         >
-                            <div className="glow-effect absolute inset-0 bg-gradient-to-r from-amber-400 via-pink-500 to-amber-400 rounded-xl opacity-50 group-hover:opacity-70 blur-md -z-10 transition-all duration-300"></div>
-
                             <GlowCard card={testimonial} index={index}>
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-4 mb-6">
+                                    <img
+                                        src={testimonial.imgPath}
+                                        alt={testimonial.name}
+                                        className="w-14 h-14 rounded-full object-cover border-2 border-amber-400/50 transition-all duration-300"
+                                    />
                                     <div>
-                                        <img
-                                            src={testimonial.imgPath}
-                                            alt={testimonial.name}
-                                            className="w-12 h-12 rounded-full object-cover"
-                                        />
-                                    </div>
-                                    <div>
-                                        <p className="font-bold">{testimonial.name}</p>
+                                        <p className="font-bold text-lg text-amber-100">{testimonial.name}</p>
                                         <p className="text-white-50">{testimonial.mentions}</p>
                                     </div>
                                 </div>
-                                <p className="mt-4">{testimonial.review}</p>
+                                <p className="text-white-90 leading-relaxed flex-grow">{testimonial.review}</p>
                             </GlowCard>
                         </div>
                     ))}

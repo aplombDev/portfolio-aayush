@@ -10,6 +10,7 @@ const Project = () => {
     const rydeRef = useRef<HTMLDivElement>(null);
     const libraryRef = useRef<HTMLDivElement>(null);
     const ycDirectoryRef = useRef<HTMLDivElement>(null);
+    const smartGKRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         if (sectionRef.current) {
@@ -24,6 +25,7 @@ const Project = () => {
             { ref: rydeRef.current, index: 0 },
             { ref: libraryRef.current, index: 1 },
             { ref: ycDirectoryRef.current, index: 2 },
+            { ref: smartGKRef.current, index: 3 },
         ];
 
         cards.forEach(({ ref, index }) => {
@@ -104,6 +106,27 @@ const Project = () => {
                                     />
                                 </div>
                                 <h2 className="text-2xl font-bold mt-4">Kathmandu Trading Group</h2>
+                            </a>
+                        </div>
+
+                        <div className="project" ref={smartGKRef}>
+                            <a
+                                href="https://www.smartgkacademy.com/all-courses"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block w-full h-full"
+                            >
+                                <div className="image-wrapper bg-[#E7F1FF] cursor-pointer h-[300px] w-full relative overflow-hidden rounded-lg">
+                                    <img
+                                        src="/images/smartgk.png"
+                                        alt="Smart GK Academy"
+                                        className="absolute h-full w-full object-contain object-center p-4"
+                                    />
+                                </div>
+                                <h2 className="text-2xl font-bold mt-4">Smart GK Academy</h2>
+                                <p className="text-white-50 md:text-xl mt-2">
+                                    Online platform for competitive exam preparation.
+                                </p>
                             </a>
                         </div>
                     </div>

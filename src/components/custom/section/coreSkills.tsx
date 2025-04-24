@@ -25,6 +25,7 @@ const CoreSkills = () => {
         ]
     ];
 
+
     const containerRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);

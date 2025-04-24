@@ -13,9 +13,10 @@ const Experience = () => {
 
         if (!timelineCards.length || !expTexts.length || !timeline) return;
 
-        timelineCards.forEach((card) => {
+        timelineCards.forEach((card, index) => {
+            const direction = index % 2 === 0 ? -100 : 100;
             gsap.from(card, {
-                xPercent: -100,
+                xPercent: direction,
                 opacity: 0,
                 duration: 1,
                 ease: "power2.inOut",
@@ -62,9 +63,8 @@ const Experience = () => {
             className="flex-center md:mt-40 mt-20 section-padding xl:px-0 relative"
         >
             <div className="w-full h-full mb-28 md:px-20 px-5">
-
                 <div className="relative">
-                    <div className="relative z-50 xl:space-y-32 space-y-10">
+                    <div className="relative z-50 space-y-24"> {/* Increased space between cards */}
                         {expCards.map((card) => (
                             <div
                                 key={card.title}
@@ -86,7 +86,7 @@ const Experience = () => {
                                                     height={60}
                                                 />
                                             </div>
-                                            <div>
+                                            <div className="pb-20">
                                                 <h1 className="font-semibold text-3xl">{card.title}</h1>
                                                 <p className="my-5 text-white-50">
                                                     🗓️&nbsp;{card.date}
@@ -94,10 +94,10 @@ const Experience = () => {
                                                 <p className="text-[#839CB5] italic mb-4">
                                                     Responsibilities
                                                 </p>
-                                                <ul className="list-disc ms-5 text-white-50">
+                                                <ul className="list-disc ms-5 text-white-50 space-y-4">
                                                     {card.responsibilities.map(
                                                         (responsibility: string, index: number) => (
-                                                            <li key={index} className="text-lg mb-6 last:mb-0">
+                                                            <li key={index} className="text-lg">
                                                                 {responsibility}
                                                             </li>
                                                         )
