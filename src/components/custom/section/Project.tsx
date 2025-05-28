@@ -51,7 +51,7 @@ const Project = () => {
                 <div className="showcaselayout">
                     <div className="first-project-wrapper" ref={rydeRef}>
                         <a
-                            href="https://mobilekhata.checkmysite.live/login"
+                            href="https://business.mobilekhaata.com/login"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="block"

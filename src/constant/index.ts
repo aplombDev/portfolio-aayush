@@ -146,8 +146,8 @@ const socialImgs = [
   },
   {
     name: "x",
-    imgPath: "/images/Y.png",
-    socialLink: "https://www.youtube.com/@knowsomethingt",
+    imgPath: "/images/github.png",
+    socialLink: "https://github.com/aplombDev",
   },
   {
     name: "linkedin",
