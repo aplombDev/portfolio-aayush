@@ -8,22 +8,22 @@ export async function POST(request: NextRequest) {
     headers: await headers(),
   });
 
-  if(!session?.user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  if (!session?.user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { content } = await request.json();
 
   if (!content || typeof content !== "string" || content.trim().length === 0) {
-    return NextResponse.json({ error: "Content is required" }, { status: 400 })
+    return NextResponse.json({ error: "Content is required" }, { status: 400 });
   }
 
   const comment = await prisma.comment.create({
     data: {
       content: content.trim(),
-      userId: session.user.id
-    }
+      userId: session.user.id,
+    },
   });
 
-  return NextResponse.json(comment)
+  return NextResponse.json(comment);
 }
